@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Recursion Project</title>
+    </head>
+
+    <body>
+        <script>
+            function fib(n) {
+                if (n === 1 || n === 2) return n - 1;
+                return fib(n - 2) + fib(n - 1);
+            };
+
+            function logFibArray(n, arr = []) {
+                if (n === 0) return arr;
+                arr.unshift(fib(n));
+                return logFibArray(n - 1, arr)
+            };
+
+            function mergeSort(arr) {
+                if (arr.length <= 1) {
+                    return arr;
+                } else {
+                    let middleIndex = Math.floor(arr.length / 2);
+                    let firstHalf = arr.slice(0, middleIndex);
+                    let secondHalf = arr.slice(middleIndex);
+                    let firstSorted = mergeSort(firstHalf);
+                    let secondSorted = mergeSort(secondHalf);
+                    return merge(firstSorted, secondSorted)
+                }
+            };
+
+            function merge(arr1, arr2) {
+                let result = [];
+                let i = 0;
+                let j = 0;
+
+                while (i < arr1.length && j < arr2.length) {
+                    if (arr1[i] < arr2[j]) {
+                        result.push(arr1[i]);
+                        i++;
+                    } else {
+                        result.push(arr2[j]);
+                        j++;
+                    }
+                }
+
+                return result.concat(arr1.slice(i).concat(arr2.slice(j)));
+            };
+        </script>
+    </body>
+
+</html>
